@@ -1,0 +1,36 @@
+{
+  "name": "dlbrt",
+  "version": "1.0.0",
+  "description": "A demo of a blockchain network",
+  "main": "src/main.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "chai": "^4.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.0.2"
+  },
+  "scripts": {
+    "test": "tests/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Muart-C/dlbrt_blockchain.git"
+  },
+  "keywords": [
+    "blockchain",
+    "dlbrt",
+    "tdd",
+    "demo",
+    "nodeJS",
+    "ES6"
+  ],
+  "author": "Muathe Ndirangu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Muart-C/dlbrt_blockchain/issues"
+  },
+  "homepage": "https://github.com/Muart-C/dlbrt_blockchain#readme"
+}
