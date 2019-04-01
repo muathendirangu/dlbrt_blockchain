@@ -20,5 +20,5 @@ jobs:
             - ./node_modules
       - run:
           name: run tests
-          command: cd src && npm test
+          command: npm test
     
