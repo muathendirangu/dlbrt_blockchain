@@ -25,10 +25,10 @@ jobs:
             chmod +x ./cc-test-reporter
       - run:
           name: run the tests and update the coverage
-          command: |
-         ./cc-test-reporter before-build
+          command: | 
+            ./cc-test-reporter before-build
           npm test
-         ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $?
+           ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $?
       - store_artifacts:
           path: coverage
           prefix: coverage
