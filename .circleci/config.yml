@@ -7,28 +7,28 @@ jobs:
     steps:
       - checkout
       - run:
-        name: update the package manager
-        command: 'sudo npm install -g npm@latest'
+          name: update the package manager
+          command: 'sudo npm install -g npm@latest'
       - restore_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package.json" }}
       - run:
-        name: Install the dependencies
-        command: npm install
+          name: Install the dependencies
+          command: npm install
       - save_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
-        paths:
-          - ./node_modules
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
       - run:
-        name: Install code coverage dependencies
-        command: |
+          name: Install code coverage dependencies
+          command: |
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
       - run:
-        name: run the tests and update the coverage
-        command: |
+          name: run the tests and update the coverage
+          command: |
          ./cc-test-reporter before-build
-         npm test
+          npm test
          ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $?
       - store_artifacts:
-        path: coverage
-        prefix: coverage
+          path: coverage
+          prefix: coverage
