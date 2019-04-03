@@ -7,13 +7,20 @@
     "test": "tests"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "chai": "^4.2.0",
-    "crypto-js": "^3.1.9-1"
+    "crypto-js": "^3.1.9-1",
+    "elliptic": "^6.4.1",
+    "express": "^4.16.4",
+    "ws": "^6.2.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "mocha": "^6.0.2"
   },
   "scripts": {
+    "start": "babel-node src/main.js",
     "test": "mocha tests/test.js"
   },
   "repository": {
