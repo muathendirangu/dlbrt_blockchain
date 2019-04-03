@@ -1,5 +1,5 @@
 import * as cryptoHashing from 'crypto-js';
-
+import { broadcast, responseToLatestMessage } from "./utils";
 class Block {
     constructor(index, data, hash, previousHash, timestamp){
         this.index = index;
@@ -18,9 +18,9 @@ const generateHashForBlock = (block) => {
 }
 const genesisBlock = new Block(0,'first test block','39DBDE4B0B29E6644F980DC9A5461E98C7BB5775BDF2CEC3A1690FC524BC307D',null,new Date().getTime());
 
-const blockchain = [genesisBlock()];
+const blockchain = [genesisBlock];
 
-var latestBlock = () => blockchain[blockchain.length - 1];
+let latestBlock = () => blockchain[blockchain.length - 1];
 
 const generateNewBlock = (blockData) => {
     const previousBlock = latestBlock();
@@ -39,8 +39,8 @@ const isNewBlockValid = (newBlock, previousBlock) => {
         console.log('the block does not contain hash of the previous block');
         return false;
     }else if(generateHashForBlock(newBlock) !== newBlock.hash){
-        console.log(typeof (newBlock.hash) + ' ' + typeof calculateHashForBlock(newBlock));
-        console.log('invalid hash: ' + calculateHashForBlock(newBlock) + ' generated and not similar to ' + newBlock.hash);
+        console.log(typeof (newBlock.hash) + ' ' + typeof generateHashForBlock(newBlock));
+        console.log('invalid hash: ' + generateHashForBlock(newBlock) + ' generated and not similar to ' + newBlock.hash);
         return false;
     }
     return true;
@@ -64,12 +64,20 @@ const ensureChainIsValid = (blockToValidate) => {
     return true;
 }
 
-// var changeToNewChain = (newBlocks) => {
-//     if (ensureChainIsValid(newBlocks) && newBlocks.length > blockchain.length) {
-//         console.log('the blockchain has added new blocks');
-//         blockchain = newBlocks;
-//         broadcast(responseLatestMsg());
-//     } else {
-//         console.log('Received blockchain invalid');
-//     }
-// };
+let addNewBlock = (newBlock) => {
+    if (isNewBlockValid(newBlock, latestBlock())) {
+        blockchain.push(newBlock);
+    }
+};
+
+let changeToNewChain = (newBlocks) => {
+    if (ensureChainIsValid(newBlocks) && newBlocks.length > blockchain.length) {
+        console.log('the blockchain has added new blocks');
+        blockchain.push(newBlocks);
+        broadcast(responseToLatestMessage());
+    } else {
+        console.log('Received blockchain invalid');
+    }
+};
+
+export {changeToNewChain, latestBlock, isBlockContentValid, addNewBlock, generateNewBlock};
